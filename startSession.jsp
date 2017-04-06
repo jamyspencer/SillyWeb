@@ -10,7 +10,7 @@
 
 	<hr />
 	<font size="+1">
-	<form method="get" action="http://localhost:8080/js_test/sessionServlet" >
+	<form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
 		<table>
 			<tr>
 				<td>Your name: </td>
