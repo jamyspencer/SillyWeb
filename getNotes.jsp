@@ -22,7 +22,7 @@ div.scrolling {
 <c:if test="${this_version == 0}">
     <c:set var="this_version"  value=""/><p>
 </c:if>
-   <form method="get" action="http://localhost:8080/js_test/sessionServlet" >
+   <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
 
       Java Source: <input type="text" name="java_source" value="${theBean.file_name}">&nbsp;&nbsp;&nbsp;Version: <input type="text" name="version" value="${this_version}">
       <br>
@@ -30,7 +30,7 @@ div.scrolling {
       <input type="submit" value="Submit">
    </form>
    <hr />
-   <form method="get" action="http://localhost:8080/js_test/sessionServlet" target="_blank">
+   <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
       <center>
          <h2>Notes: ${theBean.file_name} ${this_version}</h2>
       </center>
