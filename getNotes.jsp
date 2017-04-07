@@ -28,8 +28,11 @@
          background-color: #f5f5f5;
          border: 1px solid #ccc;
          border-radius: 4px;
-         padding: 6px;
-         min-width: 100px;
+         margin: 4px;
+      }
+      .form-group{
+         border: 2px solid #ccc;
+         border-radius: 4px;
       }
    </style>
 </head>
@@ -44,26 +47,20 @@
          <c:set var="this_version"  value=""/><p>
          </c:if>
 
-         <div class="col-lg-6">
-            <div class="col-md-4 col-sm-8">
-               <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
-                  <table>
-                     <tr>
-                        <td>Java Source:</td>
-                        <td><input class="field" type="text" name="java_source" value="${theBean.file_name}"></td>
-                     </tr>
-                     <tr>
-                        <td>Version:</td>
-                        <td><input class="field" type="text" name="version" value="${this_version}"></td>
-                     </tr>
-                  </table>
+         <div class="col-md-7">
+            <div class="col-md-4 col-xs-8">
+               <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
+                  <div class="col-xs-3">Java Source:</div>
+                  <div class="col-xs-9"><input class="field" width="100%" type="text" name="java_source" value="${theBean.file_name}"></div>
+                  <div class="col-xs-3">Version:</div>
+                  <div class="col-xs-9"><input class="field" width="100%" type="text" name="version" value="${this_version}"></div>
                   <input type="hidden" name="task" value="1">
                   <input type="submit" class="btn pull-right" value="Submit">
                </form>
             </div>
 
-            <div class = "col-md-8 form-group">
-               <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
+            <div class = "col-md-8 col-xs-12">
+               <form method="get" class="form-group" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
                   <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                   <textarea class="form-control field" rows="5" cols="100"  width="100%" name="notes">
                      ${theBean.notes}
@@ -76,7 +73,7 @@
                </form>
             </div>
          </div>
-         <div class = "col-lg-6 form-group">
+         <div class = "col-md-5 form-group">
          <h2>The file:</h2>
             <div class="scrolling form-control field" >
                <pre><b>
