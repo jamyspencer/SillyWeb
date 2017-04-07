@@ -35,6 +35,8 @@
                <input type="submit" value="Submit">
             </form>
          </div>
+      </div>
+      <div class = "row">
          <div class = "col-lg-6">
             <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
                <center>
