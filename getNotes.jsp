@@ -11,7 +11,6 @@
    <style>
    div.scrolling {
        background-color: #FFFFFF;
-       width: 1100px;
        height: 400px;
        overflow: scroll;
    }
@@ -21,8 +20,9 @@
 <body>
    <div class = "container-fluid">
       <div class = "row">
-            <center> <h1> Select a Version</h1></center>
-            <hr />
+         <center> <h1> Select a Version</h1></center>
+         <hr />
+         <div class = "col-lg-6">
             <c:set var="this_version" scope="page"  value="${theBean.version_id}" />
             <c:if test="${this_version == 0}">
             <c:set var="this_version"  value=""/><p>
@@ -34,6 +34,7 @@
                <input type="hidden" name="task" value="1">
                <input type="submit" value="Submit">
             </form>
+         </div>
          <div class = "col-lg-6">
             <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
                <center>
