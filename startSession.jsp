@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Start Session  ${thesessioncount}</title
-	<link rel="stylesheet" href="http://hoare.cs.umsl.edu/classes/Java/j-spencer/tomcat/css/bootstrap_blue.css" />
+	<link rel="stylesheet" href="http://hoare.cs.umsl.edu/css/bootstrap_blue.css" />
 </head>
 
 <body>
