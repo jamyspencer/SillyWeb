@@ -48,7 +48,7 @@
          </c:if>
 
          <div class="col-md-7">
-            < class="col-md-4 col-xs-8">
+            <div class="col-md-4 col-xs-8">
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   Java Source:<br>
                   <input class="field" width="100%" type="text" name="java_source" value="${theBean.file_name}"><br>
