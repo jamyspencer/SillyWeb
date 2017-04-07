@@ -14,8 +14,6 @@ public class JStoreServletConnect {
 
     public static void main(String[] args){
         try {
-
-
             System.out.println(  new JStoreServletConnect().get_version("littlefile.java", 2));
         } catch (Exception e) {
             e.printStackTrace();

@@ -51,9 +51,9 @@
                <h2>Java File</h2>
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   Java Source:<br>
-                  <input class="field" width="100%" type="text" name="java_source" value="${theBean.file_name}"><br>
+                  <input class="field" style="width: 100%;"  type="text" name="java_source" value="${theBean.file_name}"><br>
                   Version:<br>
-                  <input class="field" width="100%" type="text" name="version" value="${this_version}"><br>
+                  <input class="field" style="width: 100%;" type="text" name="version" value="${this_version}"><br>
                   <input type="hidden" name="task" value="1">
                   <input type="submit" class="btn pull-right" value="Submit">
                   <div class="spacer" style="clear: both;"></div>
