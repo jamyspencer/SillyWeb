@@ -9,37 +9,47 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <style>
-   div.scrolling {
-       background-color: #FFFFFF;
-       height: 400px;
-       overflow: scroll;
-   }
-   pre {
-      background-color: inherit;
-      border-width: 0px;
-   }
-   .field {
-      background-color: #f5f5f5;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-   }
+      h1 {
+         text-align: center;
+      }
+      h2 {
+         text-align: center;
+      }
+      div.scrolling {
+          background-color: #FFFFFF;
+          height: 400px;
+          overflow: scroll;
+      }
+      pre {
+         background-color: inherit;
+         border-width: 0px;
+      }
+      .field {
+         background-color: #f5f5f5;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+      }
    </style>
 </head>
 
 <body>
    <div class = "container-fluid">
       <div class = "row">
-         <center> <h1> Select a Version</h1></center>
+         <h1> Select a Version</h1>
          <hr />
-         <div class = "col-lg-6">
-            <c:set var="this_version" scope="page"  value="${theBean.version_id}" />
-            <c:if test="${this_version == 0}">
-            <c:set var="this_version"  value=""/><p>
-            </c:if>
+         <c:set var="this_version" scope="page"  value="${theBean.version_id}" />
+         <c:if test="${this_version == 0}">
+         <c:set var="this_version"  value=""/><p>
+         </c:if>
 
+         <div class = "col-lg-6 form-group">
             <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
-               Java Source: <input type="text" name="java_source" value="${theBean.file_name}">&nbsp;&nbsp;&nbsp;Version: <input type="text" name="version" value="${this_version}">
-               <br>
+               <div class="col-sm-6">
+                  Java Source: <input class="field" type="text" name="java_source" value="${theBean.file_name}">
+               </div>
+               <div class="col-sm-6">
+                  Version: <input class="field" type="text" name="version" value="${this_version}">
+               </div>
                <input type="hidden" name="task" value="1">
                <input type="submit" value="Submit">
             </form>
@@ -48,9 +58,7 @@
       <div class = "row">
          <div class = "col-lg-6 form-group">
             <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
-               <center>
-                  <h2>Notes: ${theBean.file_name} ${this_version}</h2>
-               </center>
+               <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                <textarea class="form-control field" rows="5" cols="100"  width="100%" name="notes">
                ${theBean.notes}
                </textarea> <br>
@@ -62,11 +70,11 @@
             </form>
          </div>
          <div class = "col-lg-6 form-group">
-         <center> <h2>The file:</h2> </center>
-            <div class="scrolling field form-group" >
+         <h2>The file:</h2>
+            <div class="scrolling form-control field" >
                <pre><b>
              ${theBean.this_version}
-            </b></font></pre>
+            </b></pre>
             </div>
          </div>
 
