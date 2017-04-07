@@ -80,7 +80,7 @@
             </div>
          </div>
 
-         <div class = "col-md-5 ">
+         <div class = "col-xs-12 col-sm-12 col-md-5 ">
             <div class="form-group">
                <h2>The file:</h2>
                <div class="scrolling form-control field" >
