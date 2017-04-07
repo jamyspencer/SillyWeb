@@ -26,8 +26,7 @@
       }
       .field {
          background-color: #f5f5f5;
-         border: 1px solid #ccc;
-         border-radius: 4px;
+
          margin: 4px;
       }
       .form-group{
@@ -49,6 +48,7 @@
 
          <div class="col-md-7">
             <div class="col-md-4 col-xs-8">
+               <h2>Java File</h2>
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   Java Source:<br>
                   <input class="field" width="100%" type="text" name="java_source" value="${theBean.file_name}"><br>
@@ -56,6 +56,7 @@
                   <input class="field" width="100%" type="text" name="version" value="${this_version}"><br>
                   <input type="hidden" name="task" value="1">
                   <input type="submit" class="btn pull-right" value="Submit">
+                  <div class="spacer" style="clear: both;"></div>
                </form>
             </div>
 
@@ -70,6 +71,7 @@
                   <input type="hidden" name="version" value="${theBean.version_id}">
                   <input type="hidden" name="task" value="2">
                   <input type="submit" class="btn pull-right" value="Submit">
+                  <div class="spacer" style="clear: both;"></div>
                </form>
             </div>
          </div>
