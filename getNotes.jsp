@@ -14,6 +14,15 @@
        height: 400px;
        overflow: scroll;
    }
+   pre {
+      background-color: inherit;
+      border-width: 0px;
+   }
+   .field {
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+   }
    </style>
 </head>
 
@@ -42,7 +51,7 @@
                <center>
                   <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                </center>
-               <textarea rows="5" cols="100"  name="notes">
+               <textarea class="field" rows="5" cols="100"  name="notes">
                ${theBean.notes}
                </textarea> <br>
 
@@ -54,8 +63,8 @@
          </div>
          <div class = "col-lg-6">
          <center> <h2>The file:</h2> </center>
-            <div class="scrolling">
-               <pre><font size="+1"><b>
+            <div class="scrolling, field" >
+               <pre><b>
              ${theBean.this_version}
             </b></font></pre>
             </div>
