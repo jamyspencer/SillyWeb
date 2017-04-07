@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Start Session  ${thesessioncount}</title
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap_blue.css" />
 </head>
 
 <body>
