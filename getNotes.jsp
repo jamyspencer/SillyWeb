@@ -51,7 +51,7 @@
          </c:if>
 
          <div class="col-xs-12 col-sm-12 col-md-7 " style="padding: 0px">
-            <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   <h2>Java File</h2>
                   Java Source:<br>
@@ -64,7 +64,7 @@
                </form>
             </div>
 
-            <div class = "col-xs-12 col-sm-12 col-md-8">
+            <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-8">
                <form method="get" class="form-group" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
                   <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                   <textarea class="form-control field" rows="5" cols="100"  width="100%" name="notes">
