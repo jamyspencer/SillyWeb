@@ -26,12 +26,11 @@
       }
       .field {
          background-color: #f5f5f5;
-
-         margin: 4px;
       }
       .form-group{
          border: 2px solid #ccc;
          border-radius: 4px;
+         padding: 5px;
       }
    </style>
 </head>
@@ -48,8 +47,8 @@
 
          <div class="col-md-7">
             <div class="col-md-4 col-xs-8">
-               <h2>Java File</h2>
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
+                  <h2>Java File</h2>
                   Java Source:<br>
                   <input class="field" style="width: 100%;"  type="text" name="java_source" value="${theBean.file_name}"><br>
                   Version:<br>
