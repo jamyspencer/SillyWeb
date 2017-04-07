@@ -34,7 +34,7 @@
          border: 2px solid #ccc;
          border-radius: 4px;
          padding: 5px;
-         min-height: 250px;
+         min-height: 255px;
       }
       .btn{
          margin-top: 10px;
@@ -64,8 +64,8 @@
                   <input class="field" style="width: 100%;" type="text" name="version" value="${this_version}"><br>
                   <input type="hidden" name="task" value="1">
                   <input type="submit" class="btn pull-right" value="Submit">
-                  <div class="spacer" style="clear: both;"></div>
                </form>
+               <div class="spacer" style="clear: both;"></div>
             </div>
 
             <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-8">
@@ -79,8 +79,8 @@
                   <input type="hidden" name="version" value="${theBean.version_id}">
                   <input type="hidden" name="task" value="2">
                   <input type="submit" class="btn pull-right" value="Submit">
-                  <div class="spacer" style="clear: both;"></div>
                </form>
+               <div class="spacer" style="clear: both;"></div>
             </div>
          </div>
 
