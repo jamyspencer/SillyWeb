@@ -51,7 +51,7 @@
                <center>
                   <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                </center>
-               <textarea class="field" rows="5" cols="100"  name="notes">
+               <textarea class="field" rows="5" cols="100"  width="100%" name="notes">
                ${theBean.notes}
                </textarea> <br>
 
