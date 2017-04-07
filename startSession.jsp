@@ -6,24 +6,30 @@
 </head>
 
 <body>
-   <h1>Please Log in  </h1>
-
-	<hr />
-	<form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
-		<table>
-			<tr>
-				<td>Your name: </td>
-				<td><input type="text" name="whoisit"></td>
-			</tr>
-			<tr>
-				<td>Your password: </td>
-				<td><input type="password" name="passwd"></td>
-			</tr>
-			<tr>
-				<td><input type="hidden" name="task" value="0"></td>
-				<td><input type="submit" value="Login"></td>	
-			</tr>
-		</table>
-	</form>
+	<div class = "row">
+		<div class = "col-lg-offset-3, col-md-offset-2">
+			<h1>Please Sign In</h1>
+		</div>
+	</div>
+	<div class = "row">
+		<div class = "col-lg-offset-3, col-md-offset-2">
+			<form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
+				<table>
+					<tr>
+						<td>Your name: </td>
+						<td><input type="text" name="whoisit"></td>
+					</tr>
+					<tr>
+						<td>Your password: </td>
+						<td><input type="password" name="passwd"></td>
+					</tr>
+					<tr>
+						<td><input type="hidden" name="task" value="0"></td>
+						<td><input type="submit" value="Login"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
