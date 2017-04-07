@@ -7,12 +7,12 @@
 
 <body>
 	<div class = "row">
-		<div class = "col-lg-offset-3, col-md-offset-2">
+		<div class = "col-md-4, col-md-offset-2, col-lg-5, col-lg-offset-3">
 			<h1>Please Sign In</h1>
 		</div>
 	</div>
 	<div class = "row">
-		<div class = "col-lg-offset-3, col-md-offset-2">
+		<div class =  "col-md-4, col-md-offset-2, col-lg-5, col-lg-offset-3">
 			<form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
 				<table>
 					<tr>
