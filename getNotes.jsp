@@ -46,12 +46,12 @@
          </div>
       </div>
       <div class = "row">
-         <div class = "col-lg-6">
+         <div class = "col-lg-6 form-group">
             <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
                <center>
                   <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                </center>
-               <textarea class="field" rows="5" cols="100"  width="100%" name="notes">
+               <textarea class="form-control field" rows="5" cols="100"  width="100%" name="notes">
                ${theBean.notes}
                </textarea> <br>
 
@@ -61,9 +61,9 @@
                <input type="submit" value="Submit">
             </form>
          </div>
-         <div class = "col-lg-6">
+         <div class = "col-lg-6 form-group">
          <center> <h2>The file:</h2> </center>
-            <div class="scrolling, field" >
+            <div class="scrolling field form-group" >
                <pre><b>
              ${theBean.this_version}
             </b></font></pre>
