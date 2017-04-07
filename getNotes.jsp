@@ -48,12 +48,12 @@
          </c:if>
 
          <div class="col-md-7">
-            <div class="col-md-4 col-xs-8">
+            < class="col-md-4 col-xs-8">
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
-                  <div class="col-xs-3">Java Source:</div>
-                  <div class="col-xs-9"><input class="field" width="100%" type="text" name="java_source" value="${theBean.file_name}"></div>
-                  <div class="col-xs-3">Version:</div>
-                  <div class="col-xs-9"><input class="field" width="100%" type="text" name="version" value="${this_version}"></div>
+                  Java Source:<br>
+                  <input class="field" width="100%" type="text" name="java_source" value="${theBean.file_name}"><br>
+                  Version:<br>
+                  <input class="field" width="100%" type="text" name="version" value="${this_version}"><br>
                   <input type="hidden" name="task" value="1">
                   <input type="submit" class="btn pull-right" value="Submit">
                </form>
