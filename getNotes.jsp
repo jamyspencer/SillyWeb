@@ -32,6 +32,11 @@
          border-radius: 4px;
          padding: 5px;
       }
+      .btn{
+         margin-top: 10px;
+         min-width: 120px;
+         max-width: 100%;
+      }
    </style>
 </head>
 
@@ -45,7 +50,7 @@
          <c:set var="this_version"  value=""/><p>
          </c:if>
 
-         <div class="col-md-7">
+         <div class="col-md-7 col-xs-12" style="padding: 0px">
             <div class="col-md-4 col-xs-8">
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   <h2>Java File</h2>
@@ -74,12 +79,14 @@
                </form>
             </div>
          </div>
-         <div class = "col-md-5 form-group">
-         <h2>The file:</h2>
-            <div class="scrolling form-control field" >
-               <pre><b>
-             ${theBean.this_version}
-            </b></pre>
+         <div class = "col-md-5 ">
+            <div class="form-group">
+               <h2>The file:</h2>
+               <div class="scrolling form-control field" >
+                  <pre><b>
+                ${theBean.this_version}
+               </b></pre>
+               </div>
             </div>
          </div>
 
