@@ -29,6 +29,7 @@
          border: 1px solid #ccc;
          border-radius: 4px;
          padding: 6px;
+         min-width: 100px;
       }
    </style>
 </head>
@@ -46,14 +47,18 @@
          <div class="col-lg-6">
             <div class="row form-group">
                <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
-                  <div class="col-sm-6">
-                     Java Source: <input class="field" type="text" name="java_source" value="${theBean.file_name}">
-                  </div>
-                  <div class="col-sm-6">
-                     Version: <input class="field" type="text" name="version" value="${this_version}">
-                  </div>
+                  <table>
+                     <tr>
+                        <td>Java Source:</td>
+                        <td><input class="field" type="text" name="java_source" value="${theBean.file_name}"></td>
+                     </tr>
+                     <tr>
+                        <td>Version:</td>
+                        <td><input class="field" type="text" name="version" value="${this_version}"></td>
+                     </tr>
+                  </table>
                   <input type="hidden" name="task" value="1">
-                  <input type="submit" value="Submit">
+                  <input type="submit" class="btn pull-right" value="Submit">
                </form>
             </div>
 
@@ -67,9 +72,9 @@
                   <input type="hidden" name="java_source" value="${theBean.file_name}">
                   <input type="hidden" name="version" value="${theBean.version_id}">
                   <input type="hidden" name="task" value="2">
-                  <input type="submit" value="Submit">
+                  <input type="submit" class="btn pull-right" value="Submit">
                </form>
-            </div> 
+            </div>
          </div>
          <div class = "col-lg-6 form-group">
          <h2>The file:</h2>
