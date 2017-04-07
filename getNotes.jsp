@@ -19,7 +19,7 @@
 </head>
 
 <body>
-   <div class = "container">
+   <div class = "container-fluid">
       <div class = "row">
             <center> <h1> Select a Version</h1></center>
             <hr />
