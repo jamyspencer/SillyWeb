@@ -45,7 +45,7 @@
          </c:if>
 
          <div class="col-lg-6">
-            <div class="row form-group">
+            <div class="col-md-4 col-sm-8">
                <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   <table>
                      <tr>
@@ -62,7 +62,7 @@
                </form>
             </div>
 
-            <div class = "row form-group">
+            <div class = "col-md-8 form-group">
                <form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" target="_blank">
                   <h2>Notes: ${theBean.file_name} ${this_version}</h2>
                   <textarea class="form-control field" rows="5" cols="100"  width="100%" name="notes">
