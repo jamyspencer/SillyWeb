@@ -1,15 +1,14 @@
 <!doctype html>
 <html>
 <head>
-<title>Start Session  ${thesessioncount}</title>
+	<title>Start Session  ${thesessioncount}</title
+	<link href="css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
-<center>
    <h1>Please Log in  </h1>
 
 	<hr />
-	<font size="+1">
 	<form method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
 		<table>
 			<tr>
@@ -26,7 +25,5 @@
 			</tr>
 		</table>
 	</form>
-	</font>
-</center>
 </body>
 </html>
