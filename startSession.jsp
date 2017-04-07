@@ -12,9 +12,8 @@
 <body>
 	<div class = "container">
 		<div class = "row">
-			<div class = "col-md-4, col-md-offset-2, col-lg-5, col-lg-offset-3">
+			<div class = "col-md-4, col-sm-offset-2, col-lg-5, col-lg-offset-3">
 				<h1>Please Sign In</h1>
-				<h1>${pageContext.request.contextPath}</h1>
 			</div>
 		</div>
 		<div class = "row">
