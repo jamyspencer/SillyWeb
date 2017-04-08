@@ -45,7 +45,7 @@ public class sessionServlet extends HttpServlet {
             }
         }
 
-        if(req.getParameter("logout").equals("true")){
+        if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
             System.out.println("running logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
