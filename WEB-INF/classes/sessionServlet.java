@@ -45,11 +45,12 @@ public class sessionServlet extends HttpServlet {
         if(req.getParameter("logout") != null){
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
-
-            for(Cookie cookie : cookies){
-                cookie.setMaxAge(0); //actually delete the cookies
-                cookie.setPath("/"); //allow the entire application to access it
-                res.addCookie(cookie); //add the deleted cookie back to the browser
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    cookie.setMaxAge(0); //actually delete the cookies
+                    cookie.setPath("/"); //allow the entire application to access it
+                    res.addCookie(cookie); //add the deleted cookie back to the browser
+                }
             }
             the_sessions.remove(this_session);
             session.invalidate(); //invalidate the session and unbind any object within the session
