@@ -61,11 +61,12 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("startSession.jsp");
             return;
         }
-        if ((req.getParameter("task")==null)&&(!is_first_visit)) {
+        if ((req.getParameter("task") == null) && (!is_first_visit)) {
             the_sessions.remove(this_session);
             is_first_visit=true; // just used http://hoare.cs.umsl.edu/servlet/js_test/sessionServlet
         }
         req.setAttribute("thesessioncount",the_sessions.size());
+
         if (is_first_visit) {
             log("running first visit");
 
@@ -81,6 +82,7 @@ public class sessionServlet extends HttpServlet {
         }
 
         if (this_session[2].equals("need a name")) { //No name given yet
+        log("adding a name");
             user_name=req.getParameter("whoisit");
             user_pw=req.getParameter("passwd");
             if ((user_name==null)||(user_name.trim().length()==0)||checkPW(user_name,user_pw)) {
