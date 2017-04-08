@@ -42,7 +42,9 @@ public class sessionServlet extends HttpServlet {
                 break;
             }
         }
-        if(req.getParameter("logout") != null){
+
+        if(req.getParameter("logout").equals("true")){
+            println("running logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
@@ -63,6 +65,8 @@ public class sessionServlet extends HttpServlet {
         }
         req.setAttribute("thesessioncount",the_sessions.size());
         if (is_first_visit) {
+            println("running first visit");
+
             if (the_sessions.size()==10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
                 return;
@@ -92,7 +96,7 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("Expired.jsp");
             return;
         }
-
+        printf("The value of the parameter task is %s", req.getParameter("task"));
         if (req.getParameter("task") != null) {
             this_session[1]=df.format(new Date()); //reset the last session activity time
             NotesBean thesenotes=new NotesBean();
