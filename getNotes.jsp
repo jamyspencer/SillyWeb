@@ -59,11 +59,11 @@
                <form class="form-group" method="get" action="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet" >
                   <h2>Java File</h2>
                   Java Source:<br>
-                  <input class="field" style="width: 100%;"  type="text" name="java_source" value="${theBean.file_name}"><br>
+                  <input class="field" style="width: 100%; padding-bottom: 10px;"  type="text" name="java_source" value="${theBean.file_name}"><br>
                   Version:<br>
-                  <input class="field" style="width: 100%;" type="text" name="version" value="${this_version}"><br>
+                  <input class="field" style="width: 100%; padding-bottom: 10px;" type="text" name="version" value="${this_version}"><br>
                   <input type="hidden" name="task" value="1">
-                  <input type="submit" class="btn pull-right" value="Submit">
+                  <input type="submit" class="btn pull-right" value="Open File">
                </form>
                <div class="spacer" style="clear: both;"></div>
             </div>
@@ -78,7 +78,7 @@
                   <input type="hidden" name="java_source" value="${theBean.file_name}">
                   <input type="hidden" name="version" value="${theBean.version_id}">
                   <input type="hidden" name="task" value="2">
-                  <input type="submit" class="btn pull-right" value="Submit">
+                  <input type="submit" class="btn pull-right" value="Submit Notes">
                </form>
                <div class="spacer" style="clear: both;"></div>
             </div>
