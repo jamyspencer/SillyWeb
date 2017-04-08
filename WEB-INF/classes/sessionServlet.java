@@ -46,7 +46,7 @@ public class sessionServlet extends HttpServlet {
         }
 
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
-            System.out.println("running logout");
+            log("running logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
@@ -67,7 +67,7 @@ public class sessionServlet extends HttpServlet {
         }
         req.setAttribute("thesessioncount",the_sessions.size());
         if (is_first_visit) {
-            System.out.println("running first visit");
+            log("running first visit");
 
             if (the_sessions.size()==10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
@@ -98,8 +98,9 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("Expired.jsp");
             return;
         }
-        System.out.printf("The value of the parameter task is %s", req.getParameter("task"));
+
         if (req.getParameter("task") != null) {
+            log("The value of the parameter task is " + req.getParameter("task"));
             this_session[1]=df.format(new Date()); //reset the last session activity time
             NotesBean thesenotes=new NotesBean();
             if (!req.getParameter("task").trim().equals("0")) {
@@ -130,7 +131,7 @@ public class sessionServlet extends HttpServlet {
         FileWriter fileWriter = null;
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("C:/Tomcat/webapps/js_test/session.log");
+            File theLogFile = new File("./servlet.log");
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
