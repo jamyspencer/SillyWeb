@@ -24,7 +24,7 @@ public class sessionServlet extends HttpServlet {
         String user_name="";
         String user_pw="";
 
-        if ((!(req.getParameter("task")==null))&&(req.getParameter("task").trim().equals("deploy"))) {
+        if ((!(req.getParameter("task") == null)) && (req.getParameter("task").trim().equals("deploy"))) {
             PrintWriter out = res.getWriter();
             out.println("<html>");
             out.println("<body>");
@@ -89,9 +89,9 @@ public class sessionServlet extends HttpServlet {
                 forwardTo.accept("startSession.jsp");
                 return;  // didn't enter a name in startSession
             }
-            this_session[2] = user_name.trim();
-            req.setAttribute("thename", this_session[2]);
         }
+        this_session[2] = user_name.trim();
+        req.setAttribute("thename", this_session[2]);
 
         if (tooLong(this_session[1],df.format(new Date()))) {  //Has the session timed out?
             the_sessions.remove(this_session);
