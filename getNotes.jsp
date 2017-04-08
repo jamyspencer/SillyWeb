@@ -33,7 +33,7 @@
          border: 2px solid #ccc;
          border-radius: 4px;
          padding: 5px;
-         min-height: 255px;
+         min-height: 245px;
       }
       .btn{
          margin-top: 10px;
@@ -77,7 +77,7 @@
                   <input type="hidden" name="java_source" value="${theBean.file_name}">
                   <input type="hidden" name="version" value="${theBean.version_id}">
                   <input type="hidden" name="task" value="2">
-                  <input type="submit" class="btn pull-right" value="Submit Notes">
+                  <input type="submit" id="Notes" class="btn pull-right" value="Submit Notes">
                </form>
                <div class="spacer" style="clear: both;"></div>
             </div>
@@ -96,4 +96,9 @@
       </div>
    </div>
 </body>
+<script>
+   document.getElementById("Notes").addEventListener("click", function(){
+      window.close();
+   });
+</script>
 </html>

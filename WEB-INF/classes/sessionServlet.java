@@ -39,6 +39,20 @@ public class sessionServlet extends HttpServlet {
                 break;
             }
         }
+        if(req.getParameter("logout") != null){
+            HttpSession session = req.getSession(); //get the session
+            Cookie[] cookies = req.getCookies(); //get all the cookies
+
+            for(Cookie cookie : cookies){
+                cookie.setMaxAge(0); //actually delete the cookies
+                cookie.setPath("/"); //allow the entire application to access it
+                res.addCookie(cookie); //add the deleted cookie back to the browser
+            }
+            the_sessions.remove(this_session);
+            session.invalidate(); //invalidate the session and unbind any object within the session
+            forwardTo.accept("startSession.jsp");
+            return;
+        }
         if ((req.getParameter("task")==null)&&(!is_first_visit)) {
             the_sessions.remove(this_session);
             is_first_visit=true; // just used http://hoare.cs.umsl.edu/servlet/js_test/sessionServlet
