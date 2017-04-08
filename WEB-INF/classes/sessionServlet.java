@@ -92,7 +92,7 @@ public class sessionServlet extends HttpServlet {
             return;
         }
 
-        if (req.getParameter("task")) {
+        if (req.getParameter("task") != null) {
             this_session[1]=df.format(new Date()); //reset the last session activity time
             NotesBean thesenotes=new NotesBean();
             if (!req.getParameter("task").trim().equals("0")) {
@@ -104,7 +104,7 @@ public class sessionServlet extends HttpServlet {
             req.setAttribute("thesessioncount",the_sessions.size());
             req.setAttribute("theBean",thesenotes);
             //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
-            forwardTo.accept("getNotes.jsp");
+            //forwardTo.accept("getNotes.jsp");
             return;
         }
         return;
