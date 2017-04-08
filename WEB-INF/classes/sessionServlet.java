@@ -18,7 +18,10 @@ public class sessionServlet extends HttpServlet {
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
-    {    
+    {
+        String user_name="";
+        String user_pw="";
+
         if ((!(req.getParameter("task")==null))&&(req.getParameter("task").trim().equals("deploy"))) {
             PrintWriter out = res.getWriter();
             out.println("<html>");
@@ -69,25 +72,27 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("startSession.jsp");
             return;
         }
-        String the_name="";
-        String the_pw="";
+
         if (this_session[2].equals("need a name")) { //No name given yet
-            the_name=req.getParameter("whoisit");
-            the_pw=req.getParameter("passwd");
-            if ((the_name==null)||(the_name.trim().length()==0)||checkPW(the_name,the_pw)) {
+            user_name=req.getParameter("whoisit");
+            user_pw=req.getParameter("passwd");
+            if ((user_name==null)||(user_name.trim().length()==0)||checkPW(user_name,user_pw)) {
                 the_sessions.remove(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 forwardTo.accept("startSession.jsp");
                 return;  // didn't enter a name in startSession
             }
+            this_session[2] = user_name.trim();
+            req.setAttribute("thename", this_session[2]);
         }
-        this_session[2]=the_name.trim();
-        req.setAttribute("thename", this_session[2]);
+
         if (tooLong(this_session[1],df.format(new Date()))) {  //Has the session timed out?
             the_sessions.remove(this_session);
             forwardTo.accept("Expired.jsp");
             return;
-        } else {
+        }
+
+        if (req.getParameter("task")) {
             this_session[1]=df.format(new Date()); //reset the last session activity time
             NotesBean thesenotes=new NotesBean();
             if (!req.getParameter("task").trim().equals("0")) {
@@ -102,6 +107,7 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("getNotes.jsp");
             return;
         }
+        return;
     }//end doGet
 
     boolean tooLong(String now,String then){
