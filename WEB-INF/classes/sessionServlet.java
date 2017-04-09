@@ -30,11 +30,13 @@ public class sessionServlet extends HttpServlet {
         HttpSession this_session = null;
         String ip = req.getRemoteAddr();
 
-        for (HttpSession a_session :the_sessions) {
-            if (a_session.getAttribute(USER_IP).equals(ip)) {  //Found an active session
-                is_valid_session = true;
-                this_session = a_session;
-                break;
+        if (the_sessions[0] != null) {
+            for (HttpSession a_session : the_sessions) {
+                if (a_session.getAttribute(USER_IP).equals(ip)) {  //Found an active session
+                    is_valid_session = true;
+                    this_session = a_session;
+                    break;
+                }
             }
         }
         //Check for user logging out
