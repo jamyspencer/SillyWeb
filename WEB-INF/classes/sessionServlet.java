@@ -58,6 +58,7 @@ public class sessionServlet extends HttpServlet {
                 }
             }
             the_sessions.remove(this_session);
+            req.setAttribute("thesessioncount",the_sessions.size());
             session.invalidate(); //invalidate the session and unbind any object within the session
             forwardTo.accept("startSession.jsp");
             return;
@@ -137,7 +138,7 @@ public class sessionServlet extends HttpServlet {
         FileWriter fileWriter = null;
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("./servlet.log");
+            File theLogFile = new File("/servlet.log");
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
