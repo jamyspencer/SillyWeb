@@ -110,7 +110,7 @@ public class sessionServlet extends HttpServlet {
             if (!req.getParameter("task").trim().equals("0")) {
                 thesenotes.setAll(req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
                 if (req.getParameter("task").trim().equals("2")) {
-                    thesenotes.setNotes(req.getParameter("notes"),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
+                    thesenotes.setNotes(req.getParameter("notes").trim(),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
                 }
             }
             req.setAttribute("thesessioncount",the_sessions.size());
