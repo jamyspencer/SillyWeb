@@ -27,7 +27,7 @@ public class sessionServlet extends HttpServlet {
         boolean is_valid_session = false;
 
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
-        HttpSession this_session;
+        HttpSession this_session = null;
         String ip = req.getRemoteAddr();
 
         for (HttpSession a_session :the_sessions) {
