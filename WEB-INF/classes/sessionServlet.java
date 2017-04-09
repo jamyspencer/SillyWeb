@@ -60,7 +60,7 @@ public class sessionServlet extends HttpServlet {
                 }
             }
             req.setAttribute("thesessioncount",the_sessions.size());
-            session.invalidate(); //invalidate the session and unbind any object within the session
+            this_session.invalidate(); //invalidate the session and unbind any object within the session
             forwardTo.accept("startSession.jsp");
             return;
         }
