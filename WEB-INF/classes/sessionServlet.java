@@ -15,8 +15,8 @@ public class sessionServlet extends HttpServlet {
 
 
     public void init() throws ServletException  {
-        the_sessions=new ArrayList<HttpSession>();
-        df=DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
+        the_sessions = new ArrayList<HttpSession>();
+        df = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
@@ -24,7 +24,7 @@ public class sessionServlet extends HttpServlet {
         final String USER_IP = "userIP";
         String user_name = "";
         String user_pw = "";
-        boolean is_valid_session;
+        boolean is_valid_session = false;
 
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
         HttpSession this_session;
@@ -35,9 +35,6 @@ public class sessionServlet extends HttpServlet {
                 is_valid_session = true;
                 this_session = a_session;
                 break;
-            }
-            else{
-                is_valid_session = false;
             }
         }
         //Check for user logging out
@@ -51,7 +48,9 @@ public class sessionServlet extends HttpServlet {
                     res.addCookie(cookie); //add the deleted cookie back to the browser
                 }
             }
-            the_sessions.remove(this_session);
+            if (this_session != null) {
+                the_sessions.remove(this_session);
+            }
             req.setAttribute("thesessioncount",the_sessions.size());
             session.invalidate(); //invalidate the session and unbind any object within the session
             forwardTo.accept("startSession.jsp");
