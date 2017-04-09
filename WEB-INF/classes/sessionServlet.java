@@ -52,20 +52,13 @@ public class sessionServlet extends HttpServlet {
                     res.addCookie(cookie); //add the deleted cookie back to the browser
                 }
             }
-            if (this_session != null) {
-                for (int i = 0; i< the_sessions.size(); i++){
-                    if (the_sessions.get(i).getAttribute(USER_IP).equals(this_session.getAttribute(USER_IP))) {
-                        the_sessions.remove(i);
-                    }
-                }
-            }
-            req.setAttribute("thesessioncount",the_sessions.size());
             this_session.invalidate(); //invalidate the session and unbind any object within the session
-            forwardTo.accept("startSession.jsp");
-            return;
+            if (this_session != null) {
+                the_sessions.remove(this_session);
+            }
+            is_valid_session = false;
         }
-
-        if (!is_valid_session) {
+        else if (!is_valid_session) {
             //check that there is room for new session
             if (the_sessions.size() == 10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions

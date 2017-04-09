@@ -66,8 +66,6 @@
 <body>
    <div class = "container-fluid">
       <div class = "row">
-         <h1> Select a Version</h1>
-
          <c:set var="this_version" scope="page"  value="${theBean.version_id}" />
          <c:if test="${this_version == 0}">
          <c:set var="this_version"  value=""/><p>
