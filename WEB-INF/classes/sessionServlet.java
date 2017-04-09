@@ -56,10 +56,8 @@ public class sessionServlet extends HttpServlet {
                     res.addCookie(cookie);
                 }
             }
+            the_sessions.remove(this_session);
             this_session.invalidate();
-            if (this_session != null) {
-                the_sessions.remove(this_session);
-            }
             is_valid_session = false;
         }
         if (!is_valid_session) {
