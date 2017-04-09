@@ -26,9 +26,6 @@ public class sessionServlet extends HttpServlet {
         String user_pw = "";
         boolean is_valid_session = false;
 
-        String realPath = getServletContext().getRealPath("/");
-        req.setAttribute("path", realPath);
-
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
         HttpSession this_session = null;
         String ip = req.getRemoteAddr();
@@ -47,7 +44,7 @@ public class sessionServlet extends HttpServlet {
         log(String.valueOf(req.getParameter("logout") != null));
 
         //Check for user logging out
-        if(req.getParameter("logout") != null){
+        if(req.getParameter("logout") != null && is_valid_session){
             log("in the logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies

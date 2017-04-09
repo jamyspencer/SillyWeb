@@ -38,8 +38,6 @@
 							<td><input type="submit" class="btn pull-right" value="Login"></td>
 						</tr>
 					</table>
-					<br>
-					<span>${path}</span>
 				</form>
 			</div>
 		</div>
