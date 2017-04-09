@@ -108,6 +108,7 @@ public class sessionServlet extends HttpServlet {
                 return;
             }
         }
+        req.setAttribute("thesessioncount",the_sessions.size());
         forwardTo.accept("startSession.jsp");
         return;
     }//end doGet
