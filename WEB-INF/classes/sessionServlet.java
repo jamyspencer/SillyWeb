@@ -32,9 +32,9 @@ public class sessionServlet extends HttpServlet {
 
         for (int i = 0; i < the_sessions.size(); i++) {
             try {
-                if (a_session.getAttribute(USER_IP).equals(ip)) {  //Found an active session
+                if (the_sessions.get(i).getAttribute(USER_IP).equals(ip)) {  //Found an active session
                     is_valid_session = true;
-                    this_session = a_session;
+                    this_session = the_sessions.get(i);
                     break;
                 }
             }catch (Exception e){
@@ -54,7 +54,7 @@ public class sessionServlet extends HttpServlet {
             }
             if (this_session != null) {
                 for (int i = 0; i< the_sessions.size(); i++){
-                    if (thesessions.get(i).getAttribute(USER_IP).equals(this_session.getAttribute(USER_IP))) {
+                    if (the_sessions.get(i).getAttribute(USER_IP).equals(this_session.getAttribute(USER_IP))) {
                         the_sessions.remove(i);
                     }
                 }
