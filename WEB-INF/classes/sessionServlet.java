@@ -10,7 +10,7 @@ import java.text.DateFormat;
 
 
 public class sessionServlet extends HttpServlet {
-    private    List<HttpSession> the_sessions;
+    private    ArrayList<HttpSession> the_sessions;
     private    DateFormat df;
 
 
