@@ -21,8 +21,8 @@ public class sessionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
     {
-        String user_name="";
-        String user_pw="";
+        String user_name = "";
+        String user_pw = "";
         log("starting");
 
         if ((!(req.getParameter("task") == null)) && (req.getParameter("task").trim().equals("deploy"))) {
@@ -62,6 +62,7 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("startSession.jsp");
             return;
         }
+
         if ((req.getParameter("task") == null) && (!is_first_visit)) {
             the_sessions.remove(this_session);
             is_first_visit=true; // just used http://hoare.cs.umsl.edu/servlet/js_test/sessionServlet
@@ -86,6 +87,7 @@ public class sessionServlet extends HttpServlet {
         log("adding a name");
             user_name = req.getParameter("whoisit");
             user_pw = req.getParameter("passwd");
+            this_session[2] = user_name.trim();
             if ((user_name == null)||(user_name.trim().length() == 0)) {
                 the_sessions.remove(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
@@ -93,7 +95,6 @@ public class sessionServlet extends HttpServlet {
                 return;  // didn't enter a name in startSession
             }
         }
-        this_session[2] = user_name.trim();
         req.setAttribute("thename", this_session[2]);
 
         if (tooLong(this_session[1],df.format(new Date()))) {  //Has the session timed out?
@@ -115,7 +116,9 @@ public class sessionServlet extends HttpServlet {
             req.setAttribute("thesessioncount",the_sessions.size());
             req.setAttribute("theBean",thesenotes);
             //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
-            //forwardTo.accept("getNotes.jsp");
+            if (req.getParameter("task").trim().equals("0")) {
+                forwardTo.accept("getNotes.jsp");
+            }
             return;
         }
         return;
