@@ -158,6 +158,7 @@ public class sessionServlet extends HttpServlet {
             //System.out.println(randomInt);
             randbyte[idx]=(byte)(randomInt+65);  
         }
+
         try {
             String rs=new String(randbyte, "UTF-8");
             //System.out.println(rs);
