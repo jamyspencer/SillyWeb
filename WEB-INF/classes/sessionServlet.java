@@ -135,7 +135,7 @@ public class sessionServlet extends HttpServlet {
         } finally {
             try {
                 fileWriter.close();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
 
             }
         }
