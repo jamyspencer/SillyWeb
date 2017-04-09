@@ -23,7 +23,6 @@ public class sessionServlet extends HttpServlet {
     {
         String user_name = "";
         String user_pw = "";
-        log("starting");
 
         if ((!(req.getParameter("task") == null)) && (req.getParameter("task").trim().equals("deploy"))) {
             PrintWriter out = res.getWriter();
@@ -138,7 +137,7 @@ public class sessionServlet extends HttpServlet {
         FileWriter fileWriter = null;
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("/servlet.log");
+            File theLogFile = new File("servlet.log");
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
