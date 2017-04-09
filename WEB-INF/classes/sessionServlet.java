@@ -58,7 +58,7 @@ public class sessionServlet extends HttpServlet {
             }
             is_valid_session = false;
         }
-        else if (!is_valid_session) {
+        if (!is_valid_session) {
             //check that there is room for new session
             if (the_sessions.size() == 10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
