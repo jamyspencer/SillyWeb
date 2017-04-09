@@ -10,12 +10,12 @@ import java.text.DateFormat;
 
 
 public class sessionServlet extends HttpServlet {
-    private    List<String[]>   the_sessions;
+    private    List<HttpSession> the_sessions;
     private    DateFormat df;
 
 
     public void init() throws ServletException  {
-        the_sessions=new ArrayList<String[]>();
+        the_sessions=new ArrayList<HttpSession>();
         df=DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -23,28 +23,23 @@ public class sessionServlet extends HttpServlet {
     {
         String user_name = "";
         String user_pw = "";
+        boolean is_valid_session;
 
-        if ((!(req.getParameter("task") == null)) && (req.getParameter("task").trim().equals("deploy"))) {
-            PrintWriter out = res.getWriter();
-            out.println("<html>");
-            out.println("<body>");
-            out.println("<hr /><center><h1>sessionServlet Deployed</h1></center><hr />");
-            out.println("</body>");
-            out.println("</html>"); 
-            return;
-        }
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
-        boolean is_first_visit = true;
-        String[] this_session = new String[3];
+        HttpSession this_session;
         String ip = req.getRemoteAddr();
-        for (String [] a_session :the_sessions) {
-            if (a_session[0].equals(ip)) {  //Found an active session
-                is_first_visit = false;
+
+        for (HttpSession a_session :the_sessions) {
+            if (a_session.getAttribute(userIp).equals(ip)) {  //Found an active session
+                is_valid_session = true;
                 this_session = a_session;
                 break;
             }
+            else{
+                is_valid_session = false;
+            }
         }
-
+        //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
@@ -61,61 +56,56 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("startSession.jsp");
             return;
         }
-
-        if ((req.getParameter("task") == null) && (!is_first_visit)) {
-            the_sessions.remove(this_session);
-            is_first_visit=true; // just used http://hoare.cs.umsl.edu/servlet/js_test/sessionServlet
-        }
-        req.setAttribute("thesessioncount",the_sessions.size());
-
-        if (is_first_visit) {
-            log("running first visit");
-
-            if (the_sessions.size() == 10) {
-                forwardTo.accept("noSessions.jsp");  //No Available Sessions
-                return;
-            }
-            String[] new_session = {ip,df.format(new Date()),"need a name"};
-            the_sessions.add(new_session);
-            this_session=new_session;
-            forwardTo.accept("startSession.jsp");
-            return;
-        }
-
-        if (this_session[2].equals("need a name")) { //No name given yet
-            user_name = req.getParameter("whoisit");
-            user_pw = req.getParameter("passwd");
-            this_session[2] = user_name.trim();
-
-            if ((user_name == null)||(user_name.trim().length() == 0)) {
-                the_sessions.remove(this_session);
-                req.setAttribute("thesessioncount",the_sessions.size());
-                forwardTo.accept("startSession.jsp");
-                return;  // didn't enter a name in startSession
-            }
-        }
-
+        //check for expired session
         if (tooLong(this_session[1],df.format(new Date()))) {  //Has the session timed out?
             the_sessions.remove(this_session);
             forwardTo.accept("Expired.jsp");
             return;
         }
-
-        if (req.getParameter("task") != null) {
-            this_session[1]=df.format(new Date()); //reset the last session activity time
-            NotesBean thesenotes=new NotesBean();
-            if (!req.getParameter("task").trim().equals("0")) {
-                thesenotes.setAll(req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
-                if (req.getParameter("task").trim().equals("2")) {
-                    thesenotes.setNotes(req.getParameter("notes").trim(),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
-                }
+        if (!is_valid_session) {
+            //check that there is room for new session
+            if (the_sessions.size() == 10) {
+                forwardTo.accept("noSessions.jsp");  //No Available Sessions
+                return;
             }
-            req.setAttribute("thesessioncount",the_sessions.size());
-            req.setAttribute("theBean",thesenotes);
-            //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
-            forwardTo.accept("getNotes.jsp");
-            return;
+            //see if there were a user name and password passed in
+            if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
+                user_name = req.getParameter("whoisit").trim();
+                user_pw = req.getParameter("passwd").trim();
+            }
+            //if no valid user name and password send to login page
+            if (user_name.isEmpty() || user_pw.isEmpty()) {
+                req.setAttribute("thesessioncount",the_sessions.size());
+                forwardTo.accept("startSession.jsp");
+                return;
+            }
+            else {
+                this_session = request.getSession(true);
+                this_session.setAttribute(userIp, ip);
+                the_sessions.add(this_session);
+                req.setAttribute("thesessioncount",the_sessions.size());
+                is_valid_session = true;
+            }
         }
+
+        if(is_valid_session) {
+            req.setAttribute("thesessioncount",the_sessions.size());
+            if (req.getParameter("task") != null) {
+                NotesBean thesenotes=new NotesBean();
+                if (!req.getParameter("task").trim().equals("0")) {
+                    thesenotes.setAll(req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
+                    if (req.getParameter("task").trim().equals("2")) {
+                        thesenotes.setNotes(req.getParameter("notes").trim(),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
+                    }
+                }
+                req.setAttribute("thesessioncount",the_sessions.size());
+                req.setAttribute("theBean",thesenotes);
+                //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
+                forwardTo.accept("getNotes.jsp");
+                return;
+            }
+        }
+        forwardTo.accept("startSession.jsp");
         return;
     }//end doGet
 
