@@ -61,7 +61,7 @@ public class sessionServlet extends HttpServlet {
             this_session.invalidate();
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("startSession.jsp");
-            return
+            return;
         }
         if (!is_valid_session) {
 
