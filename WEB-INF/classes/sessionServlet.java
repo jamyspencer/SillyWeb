@@ -44,7 +44,7 @@ public class sessionServlet extends HttpServlet {
                 the_sessions.remove(i);
             }
         }
-        log((req.getParameter("logout") != null).toString());
+        log(String.valueOf(req.getParameter("logout") != null));
         //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
             log("in the logout");
