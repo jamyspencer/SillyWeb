@@ -124,20 +124,14 @@ public class sessionServlet extends HttpServlet {
     public void log(String s){
         FileWriter fileWriter = null;
         try {
-            String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("/my_log");
-            /*if (!theLogFile.exists()){
-                theLogFile.createNewFile();
-            }*/
-            fileWriter = new FileWriter(theLogFile,true);
-            fileWriter.write(content);
-        } catch (IOException ex) {
-        } finally {
-            try {
-                fileWriter.close();
-            } catch (Exception ex) {
 
+            try {
+                PrintWriter fileWriter = new PrintWriter(new FileOutputStream("/my_log",true));
+                fileWriter.println(s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n");
+                fileWriter.close();
             }
+        } catch (IOException ex) {
+
         }
 
     }
