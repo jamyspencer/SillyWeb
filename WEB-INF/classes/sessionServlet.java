@@ -41,11 +41,8 @@ public class sessionServlet extends HttpServlet {
                 the_sessions.remove(i);
             }
         }
-        log(String.valueOf(req.getParameter("logout") != null));
-
         //Check for user logging out
         if(req.getParameter("logout") != null && is_valid_session){
-            log("in the logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
@@ -92,19 +89,18 @@ public class sessionServlet extends HttpServlet {
         if(is_valid_session) {
             req.setAttribute("thesessioncount",the_sessions.size());
             if (req.getParameter("task") != null) {
-                NotesBean thesenotes=new NotesBean();
+                NotesBean thesenotes = new NotesBean();
                 if (!req.getParameter("task").trim().equals("0")) {
                     thesenotes.setAll(req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
                     if (req.getParameter("task").trim().equals("2")) {
                         thesenotes.setNotes(req.getParameter("notes").trim(),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
                     }
                 }
-                req.setAttribute("thesessioncount",the_sessions.size());
-                req.setAttribute("theBean",thesenotes);
-                //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
-                forwardTo.accept("getNotes.jsp");
-                return;
             }
+            req.setAttribute("thesessioncount",the_sessions.size());
+            req.setAttribute("theBean",thesenotes);
+            forwardTo.accept("getNotes.jsp");
+            return;
         }
 
         return;
