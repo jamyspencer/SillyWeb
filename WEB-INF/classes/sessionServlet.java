@@ -126,9 +126,9 @@ public class sessionServlet extends HttpServlet {
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
             File theLogFile = new File("/my_log");
-            if (!theLogFile.exists()){
+            /*if (!theLogFile.exists()){
                 theLogFile.createNewFile();
-            }
+            }*/
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
