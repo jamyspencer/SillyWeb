@@ -96,9 +96,9 @@ public class sessionServlet extends HttpServlet {
                         thesenotes.setNotes(req.getParameter("notes").trim(),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
                     }
                 }
+                req.setAttribute("theBean",thesenotes);
             }
             req.setAttribute("thesessioncount",the_sessions.size());
-            req.setAttribute("theBean",thesenotes);
             forwardTo.accept("getNotes.jsp");
             return;
         }
