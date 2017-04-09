@@ -44,6 +44,7 @@ public class sessionServlet extends HttpServlet {
                 the_sessions.remove(i);
             }
         }
+        log((req.getParameter("logout") != null).toString());
         //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
             log("in the logout");
@@ -58,9 +59,12 @@ public class sessionServlet extends HttpServlet {
             }
             the_sessions.remove(this_session);
             this_session.invalidate();
-            is_valid_session = false;
+            req.setAttribute("thesessioncount",the_sessions.size());
+            forwardTo.accept("startSession.jsp");
+            return
         }
         if (!is_valid_session) {
+
             //check that there is room for new session
             if (the_sessions.size() == 10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
@@ -78,6 +82,7 @@ public class sessionServlet extends HttpServlet {
                 return;
             }
             else {
+                log("validated user");
                 this_session = req.getSession(true);
                 this_session.setAttribute(USER_IP, ip);
                 the_sessions.add(this_session);
@@ -103,8 +108,7 @@ public class sessionServlet extends HttpServlet {
                 return;
             }
         }
-        req.setAttribute("thesessioncount",the_sessions.size());
-        forwardTo.accept("startSession.jsp");
+
         return;
     }//end doGet
 
