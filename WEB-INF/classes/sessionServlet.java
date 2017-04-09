@@ -121,6 +121,9 @@ public class sessionServlet extends HttpServlet {
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
             File theLogFile = new File("/var/lib/tomcat/j-spencer/servlet.log");
+            if (!theLogFile.exists()){
+                theLogFile.createNewFile();
+            }
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
