@@ -26,6 +26,9 @@ public class sessionServlet extends HttpServlet {
         String user_pw = "";
         boolean is_valid_session = false;
 
+        String realPath = getServletContext().getRealPath("/");
+        req.setAttribute("path", realPath);
+
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
         HttpSession this_session = null;
         String ip = req.getRemoteAddr();
