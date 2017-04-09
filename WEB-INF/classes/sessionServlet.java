@@ -116,9 +116,7 @@ public class sessionServlet extends HttpServlet {
             req.setAttribute("thesessioncount",the_sessions.size());
             req.setAttribute("theBean",thesenotes);
             //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
-            if (!req.getParameter("task").trim().equals("2")) {
-                forwardTo.accept("getNotes.jsp");
-            }
+            forwardTo.accept("getNotes.jsp");
             return;
         }
         return;
