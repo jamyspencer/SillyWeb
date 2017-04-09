@@ -34,19 +34,18 @@ public class sessionServlet extends HttpServlet {
             return;
         }
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
-        boolean is_first_visit=true;
-        String[] this_session=new String[3];
+        boolean is_first_visit = true;
+        String[] this_session = new String[3];
         String ip = req.getRemoteAddr();
         for (String [] a_session :the_sessions) {
             if (a_session[0].equals(ip)) {  //Found an active session
-                is_first_visit=false;
-                this_session=a_session;
+                is_first_visit = false;
+                this_session = a_session;
                 break;
             }
         }
 
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
-            log("running logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
@@ -84,10 +83,10 @@ public class sessionServlet extends HttpServlet {
         }
 
         if (this_session[2].equals("need a name")) { //No name given yet
-        log("adding a name");
             user_name = req.getParameter("whoisit");
             user_pw = req.getParameter("passwd");
             this_session[2] = user_name.trim();
+
             if ((user_name == null)||(user_name.trim().length() == 0)) {
                 the_sessions.remove(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
@@ -95,7 +94,6 @@ public class sessionServlet extends HttpServlet {
                 return;  // didn't enter a name in startSession
             }
         }
-        req.setAttribute("thename", this_session[2]);
 
         if (tooLong(this_session[1],df.format(new Date()))) {  //Has the session timed out?
             the_sessions.remove(this_session);
@@ -104,7 +102,6 @@ public class sessionServlet extends HttpServlet {
         }
 
         if (req.getParameter("task") != null) {
-            log("The value of the parameter task is " + req.getParameter("task"));
             this_session[1]=df.format(new Date()); //reset the last session activity time
             NotesBean thesenotes=new NotesBean();
             if (!req.getParameter("task").trim().equals("0")) {
