@@ -30,7 +30,7 @@ public class sessionServlet extends HttpServlet {
         HttpSession this_session = null;
         String ip = req.getRemoteAddr();
 
-        if (the_sessions[0] != null) {
+        if (the_sessions.get(0) != null) {
             for (HttpSession a_session : the_sessions) {
                 if (a_session.getAttribute(USER_IP).equals(ip)) {  //Found an active session
                     is_valid_session = true;
