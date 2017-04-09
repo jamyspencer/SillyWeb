@@ -21,6 +21,7 @@ public class sessionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
     {
+        final String USER_IP = "userIP";
         String user_name = "";
         String user_pw = "";
         boolean is_valid_session;
@@ -30,7 +31,7 @@ public class sessionServlet extends HttpServlet {
         String ip = req.getRemoteAddr();
 
         for (HttpSession a_session :the_sessions) {
-            if (a_session.getAttribute(userIp).equals(ip)) {  //Found an active session
+            if (a_session.getAttribute(USER_IP).equals(ip)) {  //Found an active session
                 is_valid_session = true;
                 this_session = a_session;
                 break;
@@ -56,12 +57,7 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("startSession.jsp");
             return;
         }
-        //check for expired session
-        if (tooLong(this_session[1],df.format(new Date()))) {  //Has the session timed out?
-            the_sessions.remove(this_session);
-            forwardTo.accept("Expired.jsp");
-            return;
-        }
+
         if (!is_valid_session) {
             //check that there is room for new session
             if (the_sessions.size() == 10) {
@@ -80,8 +76,8 @@ public class sessionServlet extends HttpServlet {
                 return;
             }
             else {
-                this_session = request.getSession(true);
-                this_session.setAttribute(userIp, ip);
+                this_session = req.getSession(true);
+                this_session.setAttribute(USER_IP, ip);
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
