@@ -23,6 +23,7 @@ public class sessionServlet extends HttpServlet {
     {
         String user_name="";
         String user_pw="";
+        log("starting");
 
         if ((!(req.getParameter("task") == null)) && (req.getParameter("task").trim().equals("deploy"))) {
             PrintWriter out = res.getWriter();
@@ -70,7 +71,7 @@ public class sessionServlet extends HttpServlet {
         if (is_first_visit) {
             log("running first visit");
 
-            if (the_sessions.size()==10) {
+            if (the_sessions.size() == 10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
                 return;
             }
