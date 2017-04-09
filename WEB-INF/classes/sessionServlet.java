@@ -116,7 +116,7 @@ public class sessionServlet extends HttpServlet {
             req.setAttribute("thesessioncount",the_sessions.size());
             req.setAttribute("theBean",thesenotes);
             //req.setAttribute("theURL", "http://www.umsl.edu/~siegelj/turing.jpg");
-            if (req.getParameter("task").trim().equals("0")) {
+            if (!req.getParameter("task").trim().equals("2")) {
                 forwardTo.accept("getNotes.jsp");
             }
             return;
@@ -137,7 +137,7 @@ public class sessionServlet extends HttpServlet {
         FileWriter fileWriter = null;
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("servlet.log");
+            File theLogFile = new File("./servlet.log");
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
