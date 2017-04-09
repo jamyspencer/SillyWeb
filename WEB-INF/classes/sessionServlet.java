@@ -45,6 +45,9 @@ public class sessionServlet extends HttpServlet {
             }
         }
         log(String.valueOf(req.getParameter("logout") != null));
+        if(req.getParameter("logout") != null){
+            log(req.getParameter("logout"));
+        }
         //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
             log("in the logout");
@@ -127,7 +130,7 @@ public class sessionServlet extends HttpServlet {
             File outFile = new File(getServletContext().getRealPath("/") + "my_log");
             outFile.createNewFile();
             PrintWriter fileWriter = new PrintWriter(new FileOutputStream(outFile,true));
-            fileWriter.println(s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n");
+            fileWriter.println(s+" at: " + new Date(System.currentTimeMillis()).toString()+"\n");
             fileWriter.close();
         } catch (IOException ex) {
 
