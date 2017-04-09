@@ -10,7 +10,7 @@ import java.text.DateFormat;
 
 
 public class sessionServlet extends HttpServlet {
-    private    ArrayList<HttpSession> the_sessions;
+    private    List<HttpSession> the_sessions;
     private    DateFormat df;
 
 
@@ -30,13 +30,15 @@ public class sessionServlet extends HttpServlet {
         HttpSession this_session = null;
         String ip = req.getRemoteAddr();
 
-        if (the_sessions.get(0) != null) {
-            for (HttpSession a_session : the_sessions) {
+        for (int i = 0; i < the_sessions.size(); i++) {
+            try {
                 if (a_session.getAttribute(USER_IP).equals(ip)) {  //Found an active session
                     is_valid_session = true;
                     this_session = a_session;
                     break;
                 }
+            }catch (Exception e){
+                the_sessions.remove(i);
             }
         }
         //Check for user logging out
@@ -51,7 +53,11 @@ public class sessionServlet extends HttpServlet {
                 }
             }
             if (this_session != null) {
-                the_sessions.remove(this_session);
+                for (int i = 0; i< the_sessions.size(); i++){
+                    if (thesessions.get(i).getAttribute(USER_IP).equals(this_session.getAttribute(USER_IP))) {
+                        the_sessions.remove(i);
+                    }
+                }
             }
             req.setAttribute("thesessioncount",the_sessions.size());
             session.invalidate(); //invalidate the session and unbind any object within the session
