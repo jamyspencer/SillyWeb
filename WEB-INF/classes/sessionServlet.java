@@ -43,16 +43,17 @@ public class sessionServlet extends HttpServlet {
         }
         //Check for user logging out
         if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
+            log("in the logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    cookie.setMaxAge(0); //actually delete the cookies
-                    cookie.setPath("/"); //allow the entire application to access it
-                    res.addCookie(cookie); //add the deleted cookie back to the browser
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    res.addCookie(cookie);
                 }
             }
-            this_session.invalidate(); //invalidate the session and unbind any object within the session
+            this_session.invalidate();
             if (this_session != null) {
                 the_sessions.remove(this_session);
             }
@@ -119,7 +120,7 @@ public class sessionServlet extends HttpServlet {
         FileWriter fileWriter = null;
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("./servlet.log");
+            File theLogFile = new File("/var/lib/tomcat/j-spencer/servlet.log");
             fileWriter = new FileWriter(theLogFile,true);
             fileWriter.write(content);
         } catch (IOException ex) {
