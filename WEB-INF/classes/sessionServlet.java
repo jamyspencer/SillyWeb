@@ -45,11 +45,9 @@ public class sessionServlet extends HttpServlet {
             }
         }
         log(String.valueOf(req.getParameter("logout") != null));
-        if(req.getParameter("logout") != null){
-            log(req.getParameter("logout"));
-        }
+
         //Check for user logging out
-        if(req.getParameter("logout") != null && req.getParameter("logout").equals("true")){
+        if(req.getParameter("logout") != null){
             log("in the logout");
             HttpSession session = req.getSession(); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
