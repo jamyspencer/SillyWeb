@@ -120,7 +120,7 @@ public class sessionServlet extends HttpServlet {
         FileWriter fileWriter = null;
         try {
             String content =s+" at :"+new Date(System.currentTimeMillis()).toString()+"\n";
-            File theLogFile = new File("/var/lib/tomcat/j-spencer/servlet.log");
+            File theLogFile = new File("./mylog");
             if (!theLogFile.exists()){
                 theLogFile.createNewFile();
             }
