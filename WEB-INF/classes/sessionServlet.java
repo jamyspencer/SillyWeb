@@ -27,23 +27,20 @@ public class sessionServlet extends HttpServlet {
         boolean is_valid_session = false;
 
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
-        HttpSession this_session = null;
-        String ip = req.getRemoteAddr();
+        HttpSession this_session = req.getSession(true);
 
         for (int i = 0; i < the_sessions.size(); i++) {
             try {
-                if (the_sessions.get(i).getAttribute(USER_IP).equals(ip)) {  //Found an active session
+                if (the_sessions.get(i).getId().equals(this_session.getId())) {  //Found an active session
                     is_valid_session = true;
-                    this_session = the_sessions.get(i);
                     break;
                 }
             }catch (Exception e){
-                the_sessions.remove(i);
+                log("Error in session check");
             }
         }
         //Check for user logging out
         if(req.getParameter("logout") != null && is_valid_session){
-            HttpSession session = req.getSession(true); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
@@ -81,7 +78,6 @@ public class sessionServlet extends HttpServlet {
             }
             else {
                 //log("validated user");
-                this_session = req.getSession(true);
                 this_session.setAttribute(USER_IP, ip);
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
