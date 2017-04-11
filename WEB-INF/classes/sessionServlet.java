@@ -47,7 +47,12 @@ public class sessionServlet extends HttpServlet {
         }
         //Check for user logging out
         if(req.getParameter("logout") != null && is_valid_session){
-            the_sessions.remove(this_session);
+            for (int i = 0; i < the_sessions.size(); i++) {
+                if (the_sessions.get(i).equals(this_session)) {  //Found an active session
+                    the_sessions.remove(i);
+                    break;
+                }
+            }
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("startSession.jsp");
             return;
