@@ -10,28 +10,33 @@ import java.text.DateFormat;
 
 
 public class sessionServlet extends HttpServlet {
-    private    List<HttpSession> the_sessions;
+    private    List<String> the_sessions;
     private    DateFormat df;
-
+    private final boolean logging = true;
 
     public void init() throws ServletException  {
-        the_sessions = new ArrayList<HttpSession>();
+        the_sessions = new ArrayList<String>();
         df = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException
     {
-        final String USER_IP = "userIP";
+        String this_session;
         String user_name = "";
         String user_pw = "";
         boolean is_valid_session = false;
-
         Consumer <String> forwardTo =(s) ->ForwardTo(s,req,res);
-        HttpSession this_session = req.getSession(true);
+
+        if (req.getParameter("sessionID") != null){
+            this_session = req.getParameter("sessionID").trim();
+        }
+        else{
+            this_session = "noID";
+        }
 
         for (int i = 0; i < the_sessions.size(); i++) {
             try {
-                if (the_sessions.get(i).getId().equals(this_session.getId())) {  //Found an active session
+                if (the_sessions.get(i).equals(this_session)) {  //Found an active session
                     is_valid_session = true;
                     break;
                 }
@@ -42,25 +47,15 @@ public class sessionServlet extends HttpServlet {
         }
         //Check for user logging out
         if(req.getParameter("logout") != null && is_valid_session){
-            Cookie[] cookies = req.getCookies(); //get all the cookies
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    cookie.setMaxAge(0);
-                    cookie.setPath("/");
-                    res.addCookie(cookie);
-                }
-            }
             the_sessions.remove(this_session);
-            this_session.invalidate();
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("startSession.jsp");
             return;
         }
         //Check to see if the session needs to be validated
         if (!is_valid_session) {
-
             //check that there is room for new session
-            if (the_sessions.size() == 10) {
+            if (the_sessions.size() >= 10) {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
                 return;
             }
@@ -78,11 +73,11 @@ public class sessionServlet extends HttpServlet {
                 return;
             }
             else {
-                //log("validated user");
+                this_session = getRandomString();
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
-                log(this_session.getId());
+                if(logging) log(this_session.getId);
             }
         }
         //valid session, run primary logic and display getNotes.jsp
@@ -166,6 +161,21 @@ public class sessionServlet extends HttpServlet {
         } catch (Exception e) {
             //System.out.println("bad string");
             return "bad";
+        }
+    }
+
+    public static String getRandomString(){
+        byte[] randbyte=new byte[10];
+        Random rand  = new Random(System.currentTimeMillis());
+        for (int idx = 0; idx <10; ++idx) {
+            int randomInt = rand.nextInt(26); //0<=randomInt<26
+            System.out.print(randomInt+" ");
+            randbyte[idx]=(byte)(randomInt+65);  //"A"
+        }
+        try {
+            return new String(randbyte, "UTF-8");
+        } catch (Exception e) {
+            return "bad string" ;
         }
     }
 
