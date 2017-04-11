@@ -36,6 +36,7 @@ public class sessionServlet extends HttpServlet {
                     break;
                 }
             }catch (Exception e){
+                the_sessions.remove(i);
                 log("Error in session check");
             }
         }
@@ -78,7 +79,6 @@ public class sessionServlet extends HttpServlet {
             }
             else {
                 //log("validated user");
-                this_session.setAttribute(USER_IP, ip);
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
