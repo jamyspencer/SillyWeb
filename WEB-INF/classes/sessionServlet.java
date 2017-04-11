@@ -164,21 +164,6 @@ public class sessionServlet extends HttpServlet {
         }
     }
 
-    public static String getRandomString(){
-        byte[] randbyte=new byte[10];
-        Random rand  = new Random(System.currentTimeMillis());
-        for (int idx = 0; idx <10; ++idx) {
-            int randomInt = rand.nextInt(26); //0<=randomInt<26
-            System.out.print(randomInt+" ");
-            randbyte[idx]=(byte)(randomInt+65);  //"A"
-        }
-        try {
-            return new String(randbyte, "UTF-8");
-        } catch (Exception e) {
-            return "bad string" ;
-        }
-    }
-
 }
 
 
