@@ -42,7 +42,7 @@ public class sessionServlet extends HttpServlet {
                 }
             }catch (Exception e){
                 the_sessions.remove(i);
-                log("Error in session check");
+                if (logging) log("Error in session check");
             }
         }
         //Check for user logging out
@@ -77,7 +77,7 @@ public class sessionServlet extends HttpServlet {
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
-                if(logging) log(this_session.getId);
+                if(logging) log(this_session);
             }
         }
         //valid session, run primary logic and display getNotes.jsp
