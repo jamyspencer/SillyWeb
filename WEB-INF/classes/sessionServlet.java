@@ -43,7 +43,7 @@ public class sessionServlet extends HttpServlet {
         }
         //Check for user logging out
         if(req.getParameter("logout") != null && is_valid_session){
-            HttpSession session = req.getSession(); //get the session
+            HttpSession session = req.getSession(true); //get the session
             Cookie[] cookies = req.getCookies(); //get all the cookies
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
@@ -58,6 +58,7 @@ public class sessionServlet extends HttpServlet {
             forwardTo.accept("startSession.jsp");
             return;
         }
+        //Check to see if the session needs to be validated
         if (!is_valid_session) {
 
             //check that there is room for new session
@@ -65,10 +66,12 @@ public class sessionServlet extends HttpServlet {
                 forwardTo.accept("noSessions.jsp");  //No Available Sessions
                 return;
             }
-            //see if there were a user name and password passed in
+            //see if there was a user name and password passed in
             if (req.getParameter("whoisit") != null && req.getParameter("passwd") != null) {
                 user_name = req.getParameter("whoisit").trim();
                 user_pw = req.getParameter("passwd").trim();
+                req.removeAttribute("whoisit");
+                req.removeAttribute("passwd");
             }
             //if no valid user name and password send to login page
             if (user_name.isEmpty() || user_pw.isEmpty()) {
@@ -77,26 +80,29 @@ public class sessionServlet extends HttpServlet {
                 return;
             }
             else {
-                log("validated user");
+                //log("validated user");
                 this_session = req.getSession(true);
                 this_session.setAttribute(USER_IP, ip);
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
+                final Object lock = request.getSession().getId().intern();
             }
         }
-
+        //valid session, run primary logic and display getNotes.jsp
         if(is_valid_session) {
             req.setAttribute("thesessioncount",the_sessions.size());
-            if (req.getParameter("task") != null) {
-                NotesBean thesenotes = new NotesBean();
-                if (!req.getParameter("task").trim().equals("0")) {
-                    thesenotes.setAll(req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
-                    if (req.getParameter("task").trim().equals("2")) {
-                        thesenotes.setNotes(req.getParameter("notes").trim(),req.getParameter("java_source"),Integer.parseInt(req.getParameter("version")));
+            synchronized(lock) {
+                if (req.getParameter("task") != null) {
+                    NotesBean thesenotes = new NotesBean();
+                    if (!req.getParameter("task").trim().equals("0")) {
+                        thesenotes.setAll(req.getParameter("java_source"), Integer.parseInt(req.getParameter("version")));
+                        if (req.getParameter("task").trim().equals("2")) {
+                            thesenotes.setNotes(req.getParameter("notes").trim(), req.getParameter("java_source"), Integer.parseInt(req.getParameter("version")));
+                        }
                     }
+                    req.setAttribute("theBean", thesenotes);
                 }
-                req.setAttribute("theBean",thesenotes);
             }
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("getNotes.jsp");
