@@ -86,11 +86,12 @@ public class sessionServlet extends HttpServlet {
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
-                final Object lock = request.getSession().getId().intern();
             }
         }
         //valid session, run primary logic and display getNotes.jsp
         if(is_valid_session) {
+            final Object lock = req.getSession().getId().intern();
+
             req.setAttribute("thesessioncount",the_sessions.size());
             synchronized(lock) {
                 if (req.getParameter("task") != null) {
