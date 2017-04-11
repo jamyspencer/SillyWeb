@@ -86,12 +86,12 @@ public class sessionServlet extends HttpServlet {
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
                 is_valid_session = true;
+                log(this_session.getId());
             }
         }
         //valid session, run primary logic and display getNotes.jsp
         if(is_valid_session) {
             final Object lock = req.getSession().getId().intern();
-
             req.setAttribute("thesessioncount",the_sessions.size());
             synchronized(lock) {
                 if (req.getParameter("task") != null) {
@@ -128,7 +128,7 @@ public class sessionServlet extends HttpServlet {
             File outFile = new File(getServletContext().getRealPath("/") + "my_log");
             outFile.createNewFile();
             PrintWriter fileWriter = new PrintWriter(new FileOutputStream(outFile,true));
-            fileWriter.println(s+" at: " + new Date(System.currentTimeMillis()).toString()+"\n");
+            fileWriter.println(s+" at: " + new Date(System.currentTimeMillis()).toString());
             fileWriter.close();
         } catch (IOException ex) {
 
