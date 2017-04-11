@@ -76,6 +76,7 @@ public class sessionServlet extends HttpServlet {
                 this_session = getRandomString();
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
+                req.setAttribute("sessionID",this_session);
                 is_valid_session = true;
                 if(logging) log(this_session);
             }
