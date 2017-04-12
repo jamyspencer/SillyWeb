@@ -35,23 +35,20 @@ public class sessionServlet extends HttpServlet {
         }
 
         for (int i = 0; i < the_sessions.size(); i++) {
-            try {
-                if (the_sessions.get(i).equals(this_session)) {  //Found an active session
-                    is_valid_session = true;
-                    break;
-                }
-            }catch (Exception e){
-                the_sessions.remove(i);
-                if (logging) log("Error in session check");
+            if (the_sessions.get(i).equals(this_session)) {  //Found an active session
+                is_valid_session = true;
+                break;
             }
         }
         //Check for user logging out
         if(req.getParameter("logout") != null && is_valid_session){
             for (int i = 0; i < the_sessions.size(); i++) {
                 if (the_sessions.get(i).equals(this_session)) {  //Found an active session
+                    log("removing: " + sthe_sessions(i));
                     the_sessions.remove(i);
                     break;
                 }
+                log("looping through logout " + the_sessions.get(i));
             }
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("startSession.jsp");
