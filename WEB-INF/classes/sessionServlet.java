@@ -80,9 +80,8 @@ public class sessionServlet extends HttpServlet {
                 this_session = getRandomString();
                 the_sessions.add(this_session);
                 req.setAttribute("thesessioncount",the_sessions.size());
-                req.setAttribute("sessionID",this_session);
                 is_valid_session = true;
-                if(logging) log(this_session);
+                if(logging) log("Starting new session" + this_session);
             }
         }
         //valid session, run primary logic and display getNotes.jsp
@@ -101,6 +100,7 @@ public class sessionServlet extends HttpServlet {
                     req.setAttribute("theBean", thesenotes);
                 }
             }
+            req.setAttribute("sessionID",this_session);
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("getNotes.jsp");
             return;
