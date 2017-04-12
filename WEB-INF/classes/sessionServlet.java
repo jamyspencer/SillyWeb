@@ -44,7 +44,7 @@ public class sessionServlet extends HttpServlet {
         if(req.getParameter("logout") != null && is_valid_session){
             for (int i = 0; i < the_sessions.size(); i++) {
                 if (the_sessions.get(i).equals(this_session)) {  //Found an active session
-                    log("removing: " + the_sessions(i));
+                    log("removing: " + the_sessions.get(i));
                     the_sessions.remove(i);
                     break;
                 }
