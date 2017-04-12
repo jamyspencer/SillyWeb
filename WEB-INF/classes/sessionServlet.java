@@ -29,6 +29,7 @@ public class sessionServlet extends HttpServlet {
 
         if (req.getParameter("sessionID") != null){
             this_session = req.getParameter("sessionID").trim();
+            if(logging) log("Session ID received " + this_session);
         }
         else{
             this_session = "noID";
@@ -37,6 +38,7 @@ public class sessionServlet extends HttpServlet {
         for (int i = 0; i < the_sessions.size(); i++) {
             if (the_sessions.get(i).equals(this_session)) {  //Found an active session
                 is_valid_session = true;
+                if(logging) log("Session validated " + this_session);
                 break;
             }
         }
@@ -44,11 +46,11 @@ public class sessionServlet extends HttpServlet {
         if(req.getParameter("logout") != null && is_valid_session){
             for (int i = 0; i < the_sessions.size(); i++) {
                 if (the_sessions.get(i).equals(this_session)) {  //Found an active session
-                    log("removing: " + the_sessions.get(i));
+                    if (logging) log("removing: " + the_sessions.get(i));
                     the_sessions.remove(i);
                     break;
                 }
-                log("looping through logout " + the_sessions.get(i));
+                if (logging) log("looping through logout " + the_sessions.get(i));
             }
             req.setAttribute("thesessioncount",the_sessions.size());
             forwardTo.accept("startSession.jsp");
