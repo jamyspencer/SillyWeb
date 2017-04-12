@@ -54,7 +54,7 @@
          <!-- Collect the nav links, forms, and other content for toggling -->
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-               <li><a href="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet?logout=true?sessionID=${sessionID}">Logout</a></li>
+               <li><a href="http://hoare.cs.umsl.edu/servlet/j-spencer/sessionServlet?logout=true&sessionID=${sessionID}">Logout</a></li>
             </ul>
 
          </div><!-- /.navbar-collapse -->
